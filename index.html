@@ -7,23 +7,30 @@
     <link rel="stylesheet" href="styles.css">
     <title>Tic-Tac-Toe!</title>
 </head>
-<body>
+<body onload="openForm()">
     <div id="header">
-        <img id="logo" src="https://i.imgur.com/LlbluAR.png">
+        <img id="logo" src="https://i.imgur.com/23Gpi4k.png">
         <p id="title">Tic-Tac-Toe!</p>
     </div>
-    <div id="game-board-container">
-        <div id="space1"></div>
-        <div id="space2"></div>
-        <div id="space3"></div>
-        <div id="space4"></div>
-        <div id="space5"></div>
-        <div id="space6"></div>
-        <div id="space7"></div>
-        <div id="space8"></div>
-        <div id="space9"></div>
+    <div id="main-container">
+        <div class="player-info">
+            <p class="player1-display">Player 1: </p>
+            <p class="player2-display">Player 2: </p>
+        </div>
+        <div id="game-board-container">
+            <div id="space1"></div>
+            <div id="space2"></div>
+            <div id="space3"></div>
+            <div id="space4"></div>
+            <div id="space5"></div>
+            <div id="space6"></div>
+            <div id="space7"></div>
+            <div id="space8"></div>
+            <div id="space9"></div>
+        </div>
+        <button id="new-round-btn" onclick="">New Round</button>
+        <button id="reset-btn" onclick="window.location.reload()">Reset</button>
     </div>
-    <button id="modal-btn" onclick="startGame()">Open Form</button>
     <div class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -32,11 +39,11 @@
             </div>
             <div class="modal-form">
                 <form id="player-entry">
-                    <input id="player-one-name" type="text" value="" name="p1"><br>
                     <label for="p1">Player 1</label>
-                    <input type="text" id="player-two-name" value="" name="p2"><br>
+                    <input id="player-one-name" type="text" value="" name="p1"><br>
                     <label for="p2">Player 2</label>
-                    <input type="checkbox" name="player-chkbx" value="">
+                    <input type="text" id="player-two-name" value="" name="p2"><br>
+                    <input id = "plr-chk" type="checkbox" name="player-chkbx" value="">
                     <label for="player-chkbx">2 players?</label><br>
                 </form>
                 <button id="start-game-btn">Start</button>
