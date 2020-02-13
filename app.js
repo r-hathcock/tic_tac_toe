@@ -13,9 +13,7 @@ function openForm() {
     
     // popup modal to retrieve book information
     modal.style.display = "block";
-    
 
-    
     // event listener for checkbox status
     chkBx.addEventListener('change', (event) => {
         if (event.target.checked) {
@@ -29,11 +27,11 @@ function openForm() {
     });
 
     startBtn.onclick = () => {
-        player1 = Player(player1Entry.value);
-        player2 = Player(player2Entry.value);
+        player1 = Player(player1Entry.value, 0);
+        player2 = Player(player2Entry.value, 0);
 
         modal.style.display = "none";
-        render(player1, player2);
+        render(player1, player2, gameBoard);
     };
 
     modalCloseBtn.onclick = () => {
@@ -41,12 +39,23 @@ function openForm() {
     };
 };
 
-function render(player1, player2) {
+// display contents of players and array onto document
+function render(player1, player2, gameBoard) {
     const p1Element = document.querySelector(".player1-display");
     const p2Element = document.querySelector(".player2-display");
+    var currentSpace;
+    p1Element.innerHTML = "Player 1: " + player1.getName() + " - " + player1.getScore();
+    p2Element.innerHTML = "Player 2: " + player2.getName() + " - " + player2.getScore();
 
-    p1Element.innerHTML = "Player 1: " + player1.getName();
-    p2Element.innerHTML = "Player 2: " + player2.getName();
+    // display values of array onto gameboard
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            currentSpace = document.getElementById("space" + i + j);
+            currentSpace.innerHTML = gameBoard.gameArray[i][j];
+        }
+    }
+
+    console.log(gameBoard.gameArray[1][0]);
 };
 // module to store gameBoard array and related functions
 const gameBoard = (() => {
@@ -56,18 +65,16 @@ const gameBoard = (() => {
         ["o", "x", "o"]
     ];
 
-    const testing = () => {
-        console.log("test");
-    };
     const clearBoard = () => {
 
     };
 
-    return {gameArray, testing, clearBoard};
+    return {gameArray, clearBoard};
 })();
 
 const Player = (name, score) => {
     const getName = () => name;
+    const getScore = () => score;
 
-    return {getName};
+    return {getName, getScore};
 };

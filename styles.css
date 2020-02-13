@@ -35,12 +35,6 @@ body {
     font-size: 30px;
     margin: auto;
 }
-.player1-display {
-
-}
-.player2-display {
-
-}
 #new-round-btn {
     grid-column-start: 1;
     grid-column-end: 2;
@@ -72,69 +66,104 @@ body {
     grid-template-columns: 150px 150px 150px;
     grid-template-rows: 150px 150px 150px;
 }
-
-#space1 {
+#space00 {
     border: 1px solid black;
     grid-column-start: 1;
     grid-column-end: 2;
     grid-row-start: 1;
     grid-row-end: 2;
+    font-size: 100px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 150px;  
 }
-#space2 {
+#space01 {
     border: 1px solid black;
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 1;
     grid-row-end: 2;
+    font-size: 100px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 150px;   
 }
-#space3 {
+#space02 {
     border: 1px solid black;
     grid-column-start: 3;
     grid-column-end: 4;
     grid-row-start: 1;
     grid-row-end: 2;
+    font-size: 100px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 150px; 
 }
-#space4 {
+#space10 {
     border: 1px solid black;
     grid-column-start: 1;
     grid-column-end: 2;
     grid-row-start: 2;
     grid-row-end: 3;
+    font-size: 100px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 150px; 
 }
-#space5 {
+#space11 {
     border: 1px solid black;
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 3;
+    font-size: 100px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 150px; 
 }
-#space6 {
+#space12 {
     border: 1px solid black;
     grid-column-start: 3;
     grid-column-end: 4;
     grid-row-start: 2;
     grid-row-end: 3;
+    font-size: 100px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 150px; 
 }
-#space7 {
+#space20 {
     border: 1px solid black;
     grid-column-start: 1;
     grid-column-end: 2;
     grid-row-start: 3;
     grid-row-end: 4;
+    font-size: 100px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 150px; 
 }
-#space8 {
+#space21 {
     border: 1px solid black;
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 3;
     grid-row-end: 4;
+    font-size: 100px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 150px; 
 }
-#space9 {
+#space22 {
     border: 1px solid black;
     grid-column-start: 3;
     grid-column-end: 4;
     grid-row-start: 3;
     grid-row-end: 4;
+    font-size: 100px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 150px; 
 }
 /* MODAL */
 .modal {
