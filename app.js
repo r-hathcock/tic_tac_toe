@@ -3,7 +3,6 @@
 // prompts user to store player selection and renders new board
 function openForm() {
     const modal = document.querySelector(".modal");
-    const modalCloseBtn = document.querySelector(".close-btn");
     const startBtn = document.getElementById("start-game-btn");
     const chkBx = document.getElementById("plr-chk");
     const player1Entry = document.getElementById("player-one-name");
@@ -13,6 +12,8 @@ function openForm() {
     
     // popup modal to retrieve book information
     modal.style.display = "block";
+    player2Entry.value = "Computer";
+    player2Entry.disabled = true;
 
     // event listener for checkbox status
     chkBx.addEventListener('change', (event) => {
@@ -27,16 +28,37 @@ function openForm() {
     });
 
     startBtn.onclick = () => {
-        player1 = Player(player1Entry.value, 0);
-        player2 = Player(player2Entry.value, 0);
-
-        modal.style.display = "none";
-        render(player1, player2, gameBoard);
+        if (player1Entry.value != '' && player2Entry != '') {
+            player1 = Player(player1Entry.value, 0);
+            player2 = Player(player2Entry.value, 0);
+    
+            modal.style.display = "none";
+            gameFlow(player1, player2, gameBoard);
+        }
+        else {
+            alert("Enter valid names");
+        }
     };
+};
 
-    modalCloseBtn.onclick = () => {
-        modal.style.display = "none";
-    };
+// controls gameflow and updates status turn by turn
+function gameFlow(player1, player2, gameBoard) {
+    let gameEnd = false;
+    let turnNum = 1;
+    const randNum = function () {
+        return Math.trunc(Math.random() * 3);
+    }
+
+    // main game loop
+    do {
+
+        if (turnNum % 2 != 0) { // computer turn
+            gameBoard.gameArray[randNum()][randNum()] = 'O';
+            render(player1, player2, gameBoard);
+            gameEnd = true;
+        }
+        
+    } while (gameEnd === false);
 };
 
 // display contents of players and array onto document
@@ -44,8 +66,8 @@ function render(player1, player2, gameBoard) {
     const p1Element = document.querySelector(".player1-display");
     const p2Element = document.querySelector(".player2-display");
     var currentSpace;
-    p1Element.innerHTML = "Player 1: " + player1.getName() + " - " + player1.getScore();
-    p2Element.innerHTML = "Player 2: " + player2.getName() + " - " + player2.getScore();
+    p1Element.innerHTML = "Player 1(X): " + player1.getName() + " - " + player1.getScore();
+    p2Element.innerHTML = "Player 2(O): " + player2.getName() + " - " + player2.getScore();
 
     // display values of array onto gameboard
     for (let i = 0; i < 3; i++) {
@@ -54,15 +76,14 @@ function render(player1, player2, gameBoard) {
             currentSpace.innerHTML = gameBoard.gameArray[i][j];
         }
     }
-
-    console.log(gameBoard.gameArray[1][0]);
 };
+
 // module to store gameBoard array and related functions
 const gameBoard = (() => {
     const gameArray = [
-        ["x", "o", "o"],
-        ["x", "o", "x"],
-        ["o", "x", "o"]
+        ["", "", ""],
+        ["", "", ""],
+        ["", "", ""]
     ];
 
     const clearBoard = () => {

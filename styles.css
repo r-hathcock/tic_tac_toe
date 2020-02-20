@@ -174,7 +174,7 @@ body {
     transform: translate(-50%, -50%);
     width: 350px;
     height: 250px; 
-  }
+}
   .modal-content {
     text-align: center;
     border: 1px solid black;
@@ -187,22 +187,13 @@ body {
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
     animation-duration: 0.4s
-  }
-  .close-btn {
-    float: right; 
-    color: lightgray; 
-    font-size: 24px;  
-    font-weight: bold;
-  }
-  .close-btn:hover {
-    cursor: pointer;
-  }
+}
   
   @-webkit-keyframes animatetop {
     from {top:-300px; opacity:0} 
     to {top:0; opacity:1}
-  }
+}
   @keyframes animatetop {
     from {top:-300px; opacity:0}
     to {top:0; opacity:1}
-  }
+}
