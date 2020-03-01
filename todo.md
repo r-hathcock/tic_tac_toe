@@ -16,7 +16,7 @@
             - computer
             - randomly picks
             - render
-        - if odd
+        - if even
             - player
             - player picks
             - render
