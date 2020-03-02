@@ -45,66 +45,67 @@ function openForm() {
 
 // controls gameflow and updates status turn by turn
 function game(player1, player2, gameBoard, computerOpponent) {
-    let gameEnd = false;
-    let turnNum = 1;
-    let rand1, rand2, computerSelected, player1Selected;
+   // let gameEnd = false;
+   // let turnNum = 1;
+    let rand1, rand2, computerSelected;
     const randomSpace = () => {
         return Math.trunc(Math.random() * 3);
-    }
+    };
 
     // vs COMPUTER
     if (computerOpponent === true) { 
-        do {
-            if (turnNum % 2 != 0) { // computer turn
-                computerSelected = false;
+        render(player1, player2, gameBoard);
 
-                while (computerSelected === false) {
-                    rand1 = randomSpace();
-                    rand2 = randomSpace();
-    
-                    if (gameBoard.gameArray[rand1][rand2] == '') {
-                        gameBoard.gameArray[rand1][rand2] = 'O';
-                        computerSelected = true;
-                        render(player1, player2, gameBoard); 
-                    }
-                }
-            }         
-            if (turnNum % 2 == 0) { // player turn
-                player1Selected = false;
+        document.body.addEventListener('click', function(e) {
+            if (e.target.className == 'board-space') {
+                if (e.target.innerHTML == '') {
+                    let index1 = e.target.dataset.index1;
+                    let index2 = e.target.dataset.index2;
+                    gameBoard.gameArray[index1][index2] = 'X'; // player select
 
-                while (player1Selected === false) {
-                    document.body.addEventListener('click', function (e) {
-                        if (e.target.className === 'board-space') {
-                            if (e.target.innerHTML == '') {
-                                e.target.innerHTML = 'X';
-                                player1Selected = true;  
-                            }
-                        }
-                    });
+                    computerTurn();
+                    render(player1, player2, gameBoard);
                 }
             }
-
-            turnNum++;
-           // checkWinCondition();
-
-            if (turnNum === 10) {
-                gameEnd = true;
-            }
-        } while (gameEnd === false);
-    }
+        })
+    } ;
     
     // vs PLAYER 2
     if (computerOpponent === false) { 
-        do {
-            alert("vs player");
-            render(player1, player2, gameBoard);
-            gameEnd = true;
-        } while (gameEnd === false);
-    }
+        render(player1, player2, gameBoard);
+        let selection = 'X';
 
-    const checkWinCondition = () => {
+        document.body.addEventListener('click', function(e) {
+            if (e.target.className == 'board-space') {
+                if (e.target.innerHTML == '') {
+                    let index1 = e.target.dataset.index1;
+                    let index2 = e.target.dataset.index2;
+                    gameBoard.gameArray[index1][index2] = selection; // player select
 
-    }
+                    if (selection == 'X') 
+                        selection = 'O';
+                    else
+                        selection = 'X';
+
+                    render(player1, player2, gameBoard);
+                }
+            }
+        })
+    };
+
+    const computerTurn = () => {
+        computerSelected = false;
+                    
+        while (computerSelected === false) {
+            rand1 = randomSpace();
+            rand2 = randomSpace();
+
+            if (gameBoard.gameArray[rand1][rand2] === '') {
+                gameBoard.gameArray[rand1][rand2] = 'O';
+                computerSelected = true;
+            }
+        }
+    };
 }
 
 // display contents of players and array onto document
