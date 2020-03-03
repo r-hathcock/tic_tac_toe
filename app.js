@@ -46,7 +46,7 @@ function openForm() {
 // controls gameflow and updates status turn by turn
 function game(player1, player2, gameBoard, computerOpponent) {
    // let gameEnd = false;
-   // let turnNum = 1;
+    let turnNum = 1;
     let rand1, rand2, computerSelected;
     const randomSpace = () => {
         return Math.trunc(Math.random() * 3);
@@ -65,10 +65,11 @@ function game(player1, player2, gameBoard, computerOpponent) {
 
                     computerTurn();
                     render(player1, player2, gameBoard);
+                    gameBoard.checkWinCondition(gameBoard.gameArray);
                 }
             }
         })
-    } ;
+    };
     
     // vs PLAYER 2
     if (computerOpponent === false) { 
@@ -88,9 +89,10 @@ function game(player1, player2, gameBoard, computerOpponent) {
                         selection = 'X';
 
                     render(player1, player2, gameBoard);
+                    gameBoard.checkWinCondition(gameBoard.gameArray);
                 }
             }
-        })
+        });
     };
 
     const computerTurn = () => {
@@ -113,8 +115,8 @@ function render(player1, player2, gameBoard) {
     const p1Element = document.querySelector(".player1-display");
     const p2Element = document.querySelector(".player2-display");
     var currentSpace;
-    p1Element.innerHTML = "X: " + player1.getName() + " - " + player1.getScore();
-    p2Element.innerHTML = "0: " + player2.getName() + " - " + player2.getScore();
+    p1Element.innerHTML = "X - " + player1.getName();
+    p2Element.innerHTML = "O - " + player2.getName();
 
     // display values of array onto gameboard
     for (let i = 0; i < 3; i++) {
@@ -133,11 +135,41 @@ const gameBoard = (() => {
         ["", "", ""]
     ];
 
-    const clearBoard = () => {
+    const checkWinCondition = (gameArray) => {
+        
+        var xSum, oSum;
+        // All three cells in any row are the same
+        for (let i = 0; i < 3; i++) {
+            xSum = 0;
+            oSum = 0;
+            for (let j = 0; j < 3; j++) {
+                if (gameArray[i][j] === 'X') {
+                    xSum++;
+                } 
+                if (gameArray[i][j] === 'O') {
+                    oSum++;
+                }
 
+                if (xSum === 3) {
+                    alert("X wins!");
+                    break;
+                }
+                if (oSum === 3) {
+                    alert("O wins!");
+                    break;
+                }
+            }
+        }
+
+        // All three cells in any column are the same
+
+        // All three cells traversing the board diagonally are the same.
+
+        
+        
+        console.log(gameArray);
     };
-
-    return {gameArray, clearBoard};
+    return {gameArray, checkWinCondition};
 })()
 
 const Player = (name, score) => {

@@ -11,24 +11,18 @@
     [x] display player names on screen
 [] gameflow object
     player vs computer {
-        - start
-        - if turn is odd
-            - computer
-            - randomly picks
-            - render
-        - if even
-            - player
-            - player picks
-            - render
-        - if win condition
+        [x] start
+        [x] vs Computer
+        [x] vs Player
+        [] if win condition
             - 3 in a row
             - announce winner
             - game over
-        - if tie condition
+        [] if tie condition
             - board full but no row
             - announce tie
             - game over
-        - increment turn number
+        [] increment turn number
     }
 [x] setup html
     [x] render() contents to webpage
