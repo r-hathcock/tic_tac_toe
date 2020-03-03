@@ -136,9 +136,8 @@ const gameBoard = (() => {
     ];
 
     const checkWinCondition = (gameArray) => {
-        
         var xSum, oSum;
-        // All three cells in any row are the same
+        // check rows
         for (let i = 0; i < 3; i++) {
             xSum = 0;
             oSum = 0;
@@ -149,7 +148,6 @@ const gameBoard = (() => {
                 if (gameArray[i][j] === 'O') {
                     oSum++;
                 }
-
                 if (xSum === 3) {
                     alert("X wins!");
                     break;
@@ -160,14 +158,65 @@ const gameBoard = (() => {
                 }
             }
         }
-
-        // All three cells in any column are the same
-
+        // check columns
+        for (let i = 0; i < 3; i++) {
+            xSum = 0;
+            oSum = 0;
+            for (let j = 0; j < 3; j++) {
+                if (gameArray[j][i] === 'X') {
+                    xSum++;
+                } 
+                if (gameArray[j][i] === 'O') {
+                    oSum++;
+                }
+                if (xSum === 3) {
+                    alert("X wins!");
+                    break;
+                }
+                if (oSum === 3) {
+                    alert("O wins!");
+                    break;
+                }
+            }
+        }
         // All three cells traversing the board diagonally are the same.
-
-        
-        
-        console.log(gameArray);
+        xSum = 0;
+        oSum = 0;
+        for (let i = 0; i < 3; i++) {
+            
+            if (gameArray[i][i] === 'X') {
+                xSum++;
+            }
+            if (gameArray[i][i] === 'O') {
+                oSum++;
+            }
+            if (xSum === 3) {
+                alert("X wins!");
+                break;
+            }
+            if (oSum === 3) {
+                alert("O wins!");
+                break;
+            }
+        }
+        xSum = 0;
+        oSum = 0;
+        for (let i = 2, j = 0; i > -1; i--, j++) {
+            if (gameArray[j][i] === 'X') {
+                xSum++;
+            }
+            if (gameArray[j][i] === 'O') {
+                oSum++;
+            }
+            if (xSum === 3) {
+                alert("X wins!");
+                break;
+            }
+            if (oSum === 3) {
+                alert("O wins!");
+                break;
+            }
+        }
     };
     return {gameArray, checkWinCondition};
 })()
