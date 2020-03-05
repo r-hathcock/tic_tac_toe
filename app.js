@@ -46,7 +46,6 @@ function openForm() {
 // controls gameflow and updates status turn by turn
 function game(player1, player2, gameBoard, computerOpponent) {
    // let gameEnd = false;
-    let turnNum = 1;
     let rand1, rand2, computerSelected;
     const randomSpace = () => {
         return Math.trunc(Math.random() * 3);
@@ -63,9 +62,9 @@ function game(player1, player2, gameBoard, computerOpponent) {
                     let index2 = e.target.dataset.index2;
                     gameBoard.gameArray[index1][index2] = 'X'; // player select
 
-                    computerTurn();
                     render(player1, player2, gameBoard);
                     gameBoard.checkWinCondition(gameBoard.gameArray);
+                    computerTurn();
                 }
             }
         })
@@ -75,6 +74,7 @@ function game(player1, player2, gameBoard, computerOpponent) {
     if (computerOpponent === false) { 
         render(player1, player2, gameBoard);
         let selection = 'X';
+        player1.currentTurn = true;
 
         document.body.addEventListener('click', function(e) {
             if (e.target.className == 'board-space') {
@@ -83,10 +83,17 @@ function game(player1, player2, gameBoard, computerOpponent) {
                     let index2 = e.target.dataset.index2;
                     gameBoard.gameArray[index1][index2] = selection; // player select
 
-                    if (selection == 'X') 
+                    if (selection == 'X') {
                         selection = 'O';
-                    else
+                        player2.currentTurn = true;
+                        player1.currentTurn = false;
+                    }
+                    else {
                         selection = 'X';
+                        player2.currentTurn = false;
+                        player1.currentTurn = true;
+                    }
+                        
 
                     render(player1, player2, gameBoard);
                     gameBoard.checkWinCondition(gameBoard.gameArray);
@@ -99,6 +106,7 @@ function game(player1, player2, gameBoard, computerOpponent) {
         computerSelected = false;
                     
         while (computerSelected === false) {
+            gameBoard.checkWinCondition(gameBoard.gameArray);
             rand1 = randomSpace();
             rand2 = randomSpace();
 
@@ -107,6 +115,8 @@ function game(player1, player2, gameBoard, computerOpponent) {
                 computerSelected = true;
             }
         }
+        render(player1, player2, gameBoard);
+        gameBoard.checkWinCondition(gameBoard.gameArray);
     };
 }
 
@@ -117,6 +127,16 @@ function render(player1, player2, gameBoard) {
     var currentSpace;
     p1Element.innerHTML = "X - " + player1.getName();
     p2Element.innerHTML = "O - " + player2.getName();
+
+    if (player1.currentTurn === true) {
+        p1Element.style.color = red;
+    } else 
+    p2Element.Style.color = black;
+
+    if (player2.currentTurn === true) {
+        p2Element.style.color = red;
+    } else 
+        p2Element.Style.color = black;
 
     // display values of array onto gameboard
     for (let i = 0; i < 3; i++) {
@@ -136,7 +156,7 @@ const gameBoard = (() => {
     ];
 
     const checkWinCondition = (gameArray) => {
-        var xSum, oSum;
+        var xSum, oSum, blankSum = 0;
         // check rows
         for (let i = 0; i < 3; i++) {
             xSum = 0;
@@ -149,11 +169,19 @@ const gameBoard = (() => {
                     oSum++;
                 }
                 if (xSum === 3) {
-                    alert("X wins!");
+                    if (confirm("X wins!")) {
+                        location.reload();
+                    }
+                    else 
+                        location.reload();
                     break;
                 }
                 if (oSum === 3) {
-                    alert("O wins!");
+                    if (confirm("O wins!")) {
+                        location.reload();
+                    }
+                    else 
+                        location.reload();
                     break;
                 }
             }
@@ -170,20 +198,28 @@ const gameBoard = (() => {
                     oSum++;
                 }
                 if (xSum === 3) {
-                    alert("X wins!");
+                    if (confirm("X wins!")) {
+                        location.reload();
+                    }
+                    else 
+                        location.reload();
                     break;
                 }
                 if (oSum === 3) {
-                    alert("O wins!");
+                    if (confirm("O wins!")) {
+                        location.reload();
+                    }
+                    else 
+                        location.reload();
                     break;
                 }
             }
         }
         // All three cells traversing the board diagonally are the same.
+        // left to right
         xSum = 0;
         oSum = 0;
         for (let i = 0; i < 3; i++) {
-            
             if (gameArray[i][i] === 'X') {
                 xSum++;
             }
@@ -191,14 +227,23 @@ const gameBoard = (() => {
                 oSum++;
             }
             if (xSum === 3) {
-                alert("X wins!");
+                if (confirm("X wins!")) {
+                    location.reload();
+                }
+                else 
+                    location.reload();
                 break;
             }
             if (oSum === 3) {
-                alert("O wins!");
+                if (confirm("O wins!")) {
+                    location.reload();
+                }
+                else 
+                    location.reload();
                 break;
             }
         }
+        // right to left
         xSum = 0;
         oSum = 0;
         for (let i = 2, j = 0; i > -1; i--, j++) {
@@ -209,21 +254,48 @@ const gameBoard = (() => {
                 oSum++;
             }
             if (xSum === 3) {
-                alert("X wins!");
+                if (confirm("X wins!")) {
+                    location.reload();
+                }
+                else 
+                    location.reload();
                 break;
             }
             if (oSum === 3) {
-                alert("O wins!");
-                break;
+                if (confirm("O wins!")) {
+                    location.reload();
+                }
+                else 
+                    location.reload();
+                    break;
             }
         }
+        // check for tie game
+        blankSum = 0;
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                if (gameArray[i][j] === '') {
+                    blankSum++;
+                }
+            }
+        }
+        if (blankSum === 0) {
+            if (confirm("Tie Game!")) {
+                location.reload();
+            }
+            else 
+                location.reload();
+        }
     };
+    
+
     return {gameArray, checkWinCondition};
 })()
 
-const Player = (name, score) => {
+const Player = (name, score, turn) => {
     const getName = () => name;
     const getScore = () => score;
+    const currentTurn = () => turn;
 
-    return {getName, getScore};
+    return {getName, getScore, currentTurn};
 }
