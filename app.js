@@ -14,6 +14,7 @@ function openForm() {
     modal.style.display = "block";
     player2Entry.value = "Computer";
     player2Entry.disabled = true;
+    chkBx.checked = false;
 
     // event listener for checkbox status
     chkBx.addEventListener('change', (event) => {
@@ -30,7 +31,7 @@ function openForm() {
     })
 
     startBtn.onclick = () => {
-        if (player1Entry.value != '' && player2Entry != '') {
+        if (player1Entry.value != '' && player2Entry.value != '') {
             player1 = Player(player1Entry.value, 0);
             player2 = Player(player2Entry.value, 0);
     
@@ -93,8 +94,6 @@ function game(player1, player2, gameBoard, computerOpponent) {
                         player2.currentTurn = false;
                         player1.currentTurn = true;
                     }
-                        
-
                     render(player1, player2, gameBoard);
                     gameBoard.checkWinCondition(gameBoard.gameArray);
                 }
@@ -125,18 +124,18 @@ function render(player1, player2, gameBoard) {
     const p1Element = document.querySelector(".player1-display");
     const p2Element = document.querySelector(".player2-display");
     var currentSpace;
-    p1Element.innerHTML = "X - " + player1.getName();
-    p2Element.innerHTML = "O - " + player2.getName();
+    p1Element.innerHTML = "Player 1 - X: " + player1.getName();
+    p2Element.innerHTML = "Player 2 - O: " + player2.getName();
 
     if (player1.currentTurn === true) {
-        p1Element.style.color = red;
+        p1Element.style.color = "red";
     } else 
-    p2Element.Style.color = black;
+        p1Element.style.color = "black";
 
     if (player2.currentTurn === true) {
-        p2Element.style.color = red;
+        p2Element.style.color = "red";
     } else 
-        p2Element.Style.color = black;
+        p2Element.style.color = "black";
 
     // display values of array onto gameboard
     for (let i = 0; i < 3; i++) {
@@ -169,7 +168,7 @@ const gameBoard = (() => {
                     oSum++;
                 }
                 if (xSum === 3) {
-                    if (confirm("X wins!")) {
+                    if (confirm("Player 1 wins!")) {
                         location.reload();
                     }
                     else 
@@ -177,7 +176,7 @@ const gameBoard = (() => {
                     break;
                 }
                 if (oSum === 3) {
-                    if (confirm("O wins!")) {
+                    if (confirm("Player 2 wins!")) {
                         location.reload();
                     }
                     else 
@@ -198,7 +197,7 @@ const gameBoard = (() => {
                     oSum++;
                 }
                 if (xSum === 3) {
-                    if (confirm("X wins!")) {
+                    if (confirm("Player 1 wins!")) {
                         location.reload();
                     }
                     else 
@@ -206,7 +205,7 @@ const gameBoard = (() => {
                     break;
                 }
                 if (oSum === 3) {
-                    if (confirm("O wins!")) {
+                    if (confirm("Player 2 wins!")) {
                         location.reload();
                     }
                     else 
@@ -227,7 +226,7 @@ const gameBoard = (() => {
                 oSum++;
             }
             if (xSum === 3) {
-                if (confirm("X wins!")) {
+                if (confirm("Player 1 wins!")) {
                     location.reload();
                 }
                 else 
@@ -235,7 +234,7 @@ const gameBoard = (() => {
                 break;
             }
             if (oSum === 3) {
-                if (confirm("O wins!")) {
+                if (confirm("Player 2 wins!")) {
                     location.reload();
                 }
                 else 
@@ -254,7 +253,7 @@ const gameBoard = (() => {
                 oSum++;
             }
             if (xSum === 3) {
-                if (confirm("X wins!")) {
+                if (confirm("Player 1 wins!")) {
                     location.reload();
                 }
                 else 
@@ -262,7 +261,7 @@ const gameBoard = (() => {
                 break;
             }
             if (oSum === 3) {
-                if (confirm("O wins!")) {
+                if (confirm("Player 2 wins!")) {
                     location.reload();
                 }
                 else 
